@@ -1,3 +1,7 @@
+# "Fork" for running COMET with the TM dataset, with a requirements.txt, a few adaptions for more recent packages, and wandb removed. Still hardcoded for CUDA use.
+> python ./train.py --dataset TM --model EnFCNet --method comet
+
+runs COMET with the TM-dataset, after downloading the data as described below.
 ## Concept Learners for Few-Shot Learning
 Kaidi Cao*, Maria Brbić*, Jure Leskovec
 
