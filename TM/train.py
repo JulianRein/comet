@@ -20,7 +20,7 @@ from methods.relationnet import RelationNet
 from methods.maml import MAML
 from io_utils import model_dict, parse_args, get_resume_file
 from torch.utils.tensorboard import SummaryWriter
-import wandb
+# import wandb
 
 def train(base_loader, val_loader, model, optimization, start_epoch, stop_epoch, params, tf_writer):    
     if optimization == 'Adam':
@@ -111,7 +111,8 @@ if __name__=='__main__':
     else:
        raise ValueError('Unknown method')
 
-    model = model.cuda()
+    if torch.cuda.is_available():
+        model = model.cuda() 
 
     params.checkpoint_dir = '%s/checkpoints/%s/%s_%s_%s' %(configs.save_dir, params.dataset, params.model, params.method, params.exp_str)
     if params.train_aug:
@@ -123,7 +124,7 @@ if __name__=='__main__':
         os.makedirs(params.checkpoint_dir)
 
     store_name = '_'.join([params.dataset, params.model, params.method, params.exp_str])
-    wandb.init(project="fewshot_genes", tensorboard=True, name=store_name)
+    # wandb.init(project="fewshot_genes", tensorboard=True, name=store_name)
 
     start_epoch = params.start_epoch
     stop_epoch = params.stop_epoch
